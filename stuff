@@ -1,0 +1,58 @@
+var ctx = document.getElementById("cv").getContext("2d");
+ctx.fillStyle = "#000000";
+ctx.fillRect(0, 0, 400, 400);
+var cube = {
+  x: 5, y: 5,
+  s: 50,
+  dx: 5, dy: 5,
+  draw: function()
+  {
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, 400, 400);
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(this.x, this.y, this.s, this.s);
+  },
+  
+  update: function(dx, dy)
+  {
+    this.dx = 5 * dx;
+    this.dy = 5 * dy;
+    this.x += this.dx;
+    this.y += this.dy;
+    this.draw();
+    //setTimeout(this.draw(), 100);
+    //setInterval(update(up,down,left,right), 200);
+  }
+}
+
+cube.draw();
+
+f = function(e) {
+   var key = e.which;
+   var up = 0, down = 0, left = 0, right = 0;
+   switch(key) {
+      case 37:
+          //left
+          dx = -1;
+          dy = 0;
+          break;
+      case 38:
+          //up
+          dx = 0;
+          dy = -1;
+          break;
+      case 39:
+          //right
+          dx = 1;
+          dy = 0;
+          break;
+      case 40:
+          //down
+          dx = 0;
+          dy = 1;
+          break;
+  }
+  cube.update(dx, dy);
+}
+
+document.onkeydown = f;
